@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Bienvenido {{ name }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>Ingrese su nombre:</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-input type="text" placeholder="Nombre" [(ngModel)]="name"></ion-input>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button (click)="jugar()" expand="block" fill="clear" shape="round">
+        Jugar!!!
+      </ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let p of persons">
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>
+            <label> {{ p.name }} </label>
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content align="right">
+
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-icon name="alarm-outline"></ion-icon>
+            <div *ngIf="p.minutos < 10; then yesMinute else noMinute"></div>
+            <ng-template #yesMinute>Tiempo: 0{{p.minutos}}:</ng-template>
+            <ng-template #noMinute>Tiempo: {{p.minutos}}:</ng-template>
+
+            <div *ngIf="p.segundos < 10; then yesSec else noSec"></div>
+            <ng-template #yesSec>0{{p.segundos}}</ng-template>
+            <ng-template #noSec>{{p.segundos}}</ng-template>
+          </ion-chip>
+
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-icon name="alert-outline"></ion-icon>
+            <ion-label>Fallos: {{p.fallos}}</ion-label>
+          </ion-chip>
+
+        </ion-card-content>
+      </ion-card>
+      
+    </ion-item>
+  </ion-list>
+
+</ion-content>

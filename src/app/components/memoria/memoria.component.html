@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Encuentra los pares</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-grid fixed>
+  <ion-row *ngFor="let images of rowImages | divisor">
+    <ion-col style="text-align: center;" size="3" *ngFor="let image of images">
+      <ion-button size="large" expand="full" fill="clear" (click)="selected(image)">
+        <div *ngIf="image.show; then mostrar else noMostrar"></div>
+        <ng-template #mostrar>
+          <ion-icon name="{{ image.name }}"></ion-icon>
+        </ng-template>
+        <ng-template #noMostrar>
+          <ion-icon name="square-outline"></ion-icon>
+        </ng-template>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<label *ngIf="aciertos === 10"> Felicidades lo haz completado!!!</label>
+<ion-button *ngIf="aciertos === 10" (click)="salir()" expand="block" fill="clear" shape="round">
+  Salir
+</ion-button>
